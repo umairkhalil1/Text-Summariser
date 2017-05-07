@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1200.0" tabClosingPolicy="UNAVAILABLE" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.Controller">
+  <tabs>
+    <Tab closable="false" text="First Link">
+         <content>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea fx:id="firstText" layoutX="16.0" layoutY="48.0" prefHeight="511.0" prefWidth="571.0" wrapText="true"/>
+                        <TextField layoutX="215.0" layoutY="14.0" text="           Original Text" />
+                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="292.0">
+                     <children>
+                        <TextField layoutX="215.0" layoutY="14.0" text="             Summary" />
+                        <TextArea fx:id="firstSum" layoutX="16.0" layoutY="48.0" prefHeight="511.0" prefWidth="571.0" wrapText="true"/>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </content>
+    </Tab>
+    <Tab closable="false" text="Second Link">
+         <content>
+            <SplitPane dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea fx:id="secondText" layoutX="22.0" layoutY="48.0" prefHeight="511.0" prefWidth="571.0" wrapText="true"/>
+                        <TextField layoutX="215.0" layoutY="14.0" text="           Original Text" />
+                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="292.0">
+                     <children>
+                        <TextField layoutX="215.0" layoutY="14.0" text="             Summary" />
+                        <TextArea fx:id="secondSum" layoutX="16.0" layoutY="48.0" prefHeight="511.0" prefWidth="571.0" wrapText="true"/>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </content>
+    </Tab>
+      <Tab closable="false" text="Third Link">
+         <content>
+            <SplitPane disable="true" dividerPositions="0.5" prefHeight="160.0" prefWidth="200.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                     <children>
+                        <TextArea fx:id="thirdText" layoutX="22.0" layoutY="48.0" prefHeight="511.0" prefWidth="571.0" wrapText="true"/>
+                        <TextField layoutX="215.0" layoutY="14.0" text="           Original Text" />
+                     </children></AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="363.0" prefWidth="292.0">
+                     <children>
+                        <TextField layoutX="215.0" layoutY="14.0" text="             Summary" />
+                        <TextArea fx:id="thirdSum" layoutX="16.0" layoutY="48.0" prefHeight="511.0" prefWidth="571.0" wrapText="true"/>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+         </content>
+      </Tab>
+  </tabs>
+</TabPane>
