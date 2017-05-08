@@ -43,8 +43,8 @@ public class Third {
 	public static String getThirdSum() throws FailingHttpStatusCodeException, IOException, ResourceInstantiationException {
 
 		SerialAnalyserController controller;
-		ProcessingResource tokeniser, statistics, split; //Declare default GATE variables to use
-		ProcessingResource termFreq, scorer, position; //Declare SUMMA variables to use 
+		ProcessingResource tokeniser, split; //Declare GATE variables to use
+		ProcessingResource termFreq, statistics, scorer, paraScorer, posScorer; //Declare SUMMA variables to use 
 		LanguageResource idfTable; //Declare IDF table
 		String sumText = ""; 
 			try {
@@ -67,11 +67,13 @@ public class Third {
 						
 			//Register and add SUMMA resources to the controller
 			termFreq = (ProcessingResource) Factory.createResource("summa.scorer.SentenceTermFrequency");
-			position = (ProcessingResource) Factory.createResource("summa.scorer.PositionScorer"); 
+			posScorer = (ProcessingResource) Factory.createResource("summa.scorer.PositionScorer"); 
 			scorer = (ProcessingResource) Factory.createResource("summa.SimpleSummarizer");
+			paraScorer = (ProcessingResource) Factory.createResource("summa.scorer.ParagraphScorer");		
 			controller.add(termFreq);
-			controller.add(position);
+			controller.add(posScorer);
 			controller.add(scorer);
+			controller.add(paraScorer);
 			
 			//Score each sentence within the ArrayList using the SUMMA resources  
 			ArrayList<String> features = new ArrayList<String>();
@@ -90,9 +92,9 @@ public class Third {
 			scorer.setParameterValue("sumWeigths", ws);
 
 			Corpus corpus = Factory.newCorpus(""); //Initialise Corpus
-			Document doc = Factory.newDocument(getThird()); // Store method to get text in Corpus
-			corpus.add(doc);
 			controller.setCorpus(corpus);
+			Document doc = Factory.newDocument(getThird()); //Stores method that retrieves text as Doc
+			corpus.add(doc); //Add Doc to Corpus
 			controller.execute();
 			sumText = (applySummary(doc));	//Call applySummary to summarise doc and save as String
 					
@@ -110,7 +112,7 @@ public class Third {
 		AnnotationSet sentences = doc.getAnnotations("EXTRACT").get("Sentence"); //Stores summary in Annotationset
 		Annotation sentence; //Apply annotations to each sentence
 		Long start, end;
-		ArrayList<Annotation> sentList = new ArrayList<Annotation>(sentences); //Stores the 
+		ArrayList<Annotation> sentList = new ArrayList<Annotation>(sentences); //Stores the annotations of each sentence 
 		Collections.sort(sentList, new OffsetComparator()); //Sorts the scores of the sentences
 		for (int i = 0; i < sentList.size(); i++) { 
 			sentence = sentList.get(i); //Gets sentence from ArrayList
