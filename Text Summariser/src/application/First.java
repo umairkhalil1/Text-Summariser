@@ -11,6 +11,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -19,6 +21,14 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class First {
+	
+	public static void main(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException, ResourceInstantiationException {
+		org.apache.log4j.BasicConfigurator.configure();
+		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
+		System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
+		getFirstSum();
+	}
+	
 	
 	public static String getFirst() throws FailingHttpStatusCodeException, IOException {
 		String firstText = "";
@@ -45,7 +55,6 @@ public class First {
 			
 			//Register and use GATE Controller, Sentence Splitter and Tokeniser  
 			Gate.getCreoleRegister().registerDirectories(new URL("file:///Applications/GATE_Developer_8.2/plugins/ANNIE"));
-			Gate.getCreoleRegister().registerDirectories(new URL("file:///Applications/GATE_Developer_8.2/plugins/summa_plugin"));
 			controller = (SerialAnalyserController) Factory.createResource("gate.creole.SerialAnalyserController",Factory.newFeatureMap(), Factory.newFeatureMap(),"Summariser");
 			tokeniser = (ProcessingResource) Factory.createResource("gate.creole.tokeniser.DefaultTokeniser",Factory.newFeatureMap());
 			split = (ProcessingResource) Factory.createResource("gate.creole.splitter.SentenceSplitter",Factory.newFeatureMap(), Factory.newFeatureMap());
@@ -89,7 +98,10 @@ public class First {
 			Document doc = Factory.newDocument(getFirst()); //Stores method that retrieves text as Doc
 			corpus.add(doc); //Add Doc to Corpus
 			controller.execute();
+			System.out.println(doc.getAnnotations());
+
 			sumText = (applySummary(doc));	//Call applySummary to summarise doc and save as String
+
 					
 			} catch (MalformedURLException ex) {
 				ex.printStackTrace();

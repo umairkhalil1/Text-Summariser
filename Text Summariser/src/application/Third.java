@@ -52,7 +52,6 @@ public class Third {
 			
 			//Register and use GATE Controller, Sentence Splitter and Tokeniser  
 			Gate.getCreoleRegister().registerDirectories(new URL("file:///Applications/GATE_Developer_8.2/plugins/ANNIE"));
-			Gate.getCreoleRegister().registerDirectories(new URL("file:///Applications/GATE_Developer_8.2/plugins/summa_plugin"));
 			controller = (SerialAnalyserController) Factory.createResource("gate.creole.SerialAnalyserController",Factory.newFeatureMap(), Factory.newFeatureMap(),"Summariser");
 			tokeniser = (ProcessingResource) Factory.createResource("gate.creole.tokeniser.DefaultTokeniser",Factory.newFeatureMap());
 			split = (ProcessingResource) Factory.createResource("gate.creole.splitter.SentenceSplitter",Factory.newFeatureMap(), Factory.newFeatureMap());
