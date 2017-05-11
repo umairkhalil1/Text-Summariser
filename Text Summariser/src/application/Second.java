@@ -101,7 +101,7 @@ public class Second {
 	public static String applySummary(Document doc) {
 		String summary = "";
 		String txt = doc.getContent().toString(); //Converts doc to be summarised to String
-		AnnotationSet sentences = doc.getAnnotations("EXTRACT").get("Sentence"); //Stores summary in Annotationset
+		AnnotationSet sentences = doc.getAnnotations("EXTRACT").get("Sentence"); //Stores group of summary annotations
 		Annotation sentence; //Apply annotations to each sentence
 		Long start, end;
 		ArrayList<Annotation> sentList = new ArrayList<Annotation>(sentences); //Stores the annotations of each sentence

@@ -11,8 +11,6 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.logging.Level;
-
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomNode;
@@ -21,14 +19,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 public class First {
-	
-	public static void main(String[] args) throws FailingHttpStatusCodeException, MalformedURLException, IOException, ResourceInstantiationException {
-		org.apache.log4j.BasicConfigurator.configure();
-		java.util.logging.Logger.getLogger("com.gargoylesoftware").setLevel(Level.OFF);
-		System.setProperty("org.apache.commons.logging.Log", "org.apache.commons.logging.impl.NoOpLog");
-		getFirstSum();
-	}
-	
 	
 	public static String getFirst() throws FailingHttpStatusCodeException, IOException {
 		String firstText = "";
@@ -70,12 +60,12 @@ public class First {
 			//Register and add SUMMA resources to the controller
 			termFreq = (ProcessingResource) Factory.createResource("summa.scorer.SentenceTermFrequency");
 			posScorer = (ProcessingResource) Factory.createResource("summa.scorer.PositionScorer"); 
-			scorer = (ProcessingResource) Factory.createResource("summa.SimpleSummarizer");
 			paraScorer = (ProcessingResource) Factory.createResource("summa.scorer.ParagraphScorer");		
+			scorer = (ProcessingResource) Factory.createResource("summa.SimpleSummarizer");
 			controller.add(termFreq);
 			controller.add(posScorer);
-			controller.add(scorer);
 			controller.add(paraScorer);
+			controller.add(scorer);
 			
 			//Score each sentence within the ArrayList using the SUMMA resources  
 			ArrayList<String> features = new ArrayList<String>();
@@ -98,10 +88,7 @@ public class First {
 			Document doc = Factory.newDocument(getFirst()); //Stores method that retrieves text as Doc
 			corpus.add(doc); //Add Doc to Corpus
 			controller.execute();
-			System.out.println(doc.getAnnotations());
-
 			sumText = (applySummary(doc));	//Call applySummary to summarise doc and save as String
-
 					
 			} catch (MalformedURLException ex) {
 				ex.printStackTrace();
@@ -114,7 +101,7 @@ public class First {
 	public static String applySummary(Document doc) {
 		String summary = "";
 		String txt = doc.getContent().toString(); //Converts doc to be summarised to String
-		AnnotationSet sentences = doc.getAnnotations("EXTRACT").get("Sentence"); //Stores summary in Annotationset
+		AnnotationSet sentences = doc.getAnnotations("EXTRACT").get("Sentence"); //Stores group of summary annotations
 		Annotation sentence; //Apply annotations to each sentence
 		Long start, end;
 		ArrayList<Annotation> sentList = new ArrayList<Annotation>(sentences); //Stores the annotations of each sentence
